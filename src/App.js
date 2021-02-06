@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Dashboard from './components/dashboard/Dashboard';
 import Navbar from './components/layout/Navbar';
 
 class App extends Component {
@@ -8,6 +9,11 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <Navbar />
+          <Switch>
+            {/* // */}
+            <Route exact to="/" component={Dashboard} />
+          </Switch>
+          <Dashboard />
         </BrowserRouter>
       </div>
     );
