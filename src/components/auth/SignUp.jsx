@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 class SignUp extends Component {
   state = {
-    firstname: null,
-    lastname: null,
-    email: null,
-    password: null,
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
   };
 
   handleChange = (e) => {

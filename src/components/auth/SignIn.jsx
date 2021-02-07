@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class SignIn extends Component {
   state = {
-    email: null,
-    password: null,
+    email: '',
+    password: '',
   };
 
   handleChange = (e) => {
@@ -31,7 +31,6 @@ class SignIn extends Component {
             <input type="password" id="password" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            {/* #task #findOut plain button submit nuance */}
             <button className="btn pink lighten-1 z-depth-0">Sign In</button>
           </div>
         </form>
