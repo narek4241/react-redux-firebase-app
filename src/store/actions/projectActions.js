@@ -1,5 +1,5 @@
 export const createProject = (project) => {
-  return (dispatch, getState) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
     // some async statement
     dispatch({
       type: 'CREATE_PROJECT',
