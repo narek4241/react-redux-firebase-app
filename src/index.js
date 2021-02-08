@@ -6,13 +6,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
 import thunk from 'redux-thunk';
+import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import {
-  reactReduxFirebase, // removed from API, doc opt
-  ReactReduxFirebaseProvider, // new API, doc opt
-  getFirebase,
-} from 'react-redux-firebase';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
-import fbConfig from './config/fbConfig';
+  reduxFirestore,
+  getFirestore,
+  createFirestoreInstance,
+} from 'redux-firestore';
+import firebase, { firebaseConfig } from './config/fbConfig';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -20,15 +20,23 @@ const store = createStore(
   rootReducer,
   composeEnhancers(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    // reactReduxFirebase(fbConfig), // ok?rm
-    reduxFirestore(fbConfig)
+    reduxFirestore(firebase)
   )
 );
+
+const rrfProps = {
+  firebase,
+  config: firebaseConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance,
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <App />
+      </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

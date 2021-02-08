@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 // #note not sensitive data, later put in env vars if needed, opt
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyDvPthRAeeRc3U5V43nxDipTZm88NoyEfE',
   authDomain: 'marioplan-react-app-2cb3a.firebaseapp.com',
   databaseURL:
