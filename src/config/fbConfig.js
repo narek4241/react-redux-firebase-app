@@ -1,4 +1,4 @@
-import firebase from 'friebase/app';
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
@@ -15,7 +15,7 @@ const firebaseConfig = {
   measurementId: 'G-J4KJ9JZNRP',
 };
 
-firebase.initalizeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({ timestampsInSnapshots: true });
 
 export default firebase;
