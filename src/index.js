@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
 import thunk from 'redux-thunk';
-import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
+import {
+  ReactReduxFirebaseProvider,
+  getFirebase,
+  isLoaded,
+} from 'react-redux-firebase';
 import {
   reduxFirestore,
   getFirestore,
@@ -31,11 +35,21 @@ const rrfProps = {
   createFirestoreInstance,
 };
 
+// #note taken from doc v3.0.0 opt
+function AuthIsLoaded({ children }) {
+  // #note #syntax useSelector - allows to extract data from store state opt
+  const auth = useSelector((state) => state.firebase.auth);
+  if (!isLoaded(auth)) return <div></div>;
+  return children;
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rrfProps}>
-        <App />
+        <AuthIsLoaded>
+          <App />
+        </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
