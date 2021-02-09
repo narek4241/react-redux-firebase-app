@@ -15,6 +15,11 @@ export const firebaseConfig = {
   measurementId: 'G-J4KJ9JZNRP',
 };
 
+export const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+};
+
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({ timestampsInSnapshots: true });
 

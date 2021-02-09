@@ -29,22 +29,20 @@ export const signUp = ({ email, password, firstname, lastname }) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
+    // #task shorten opt
+    const fnameInitial = firstname ? firstname[0] : '';
+    const lnameInitial = lastname ? lastname[0] : '';
+    const initials = fnameInitial + lnameInitial;
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((res) => {
-        firestore
-          .collection('users')
-          .doc(res.user.uid)
-          .set({
-            firstname,
-            lastname,
-            initials: firstname
-              ? firstname[0]
-              : '' + lastname
-              ? lastname[0]
-              : '',
-          });
+        firestore.collection('users').doc(res.user.uid).set({
+          firstname,
+          lastname,
+          initials,
+        });
       })
       .then(() => {
         dispatch({ type: 'SIGNUP_SUCCESS' });
