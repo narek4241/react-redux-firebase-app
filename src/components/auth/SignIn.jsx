@@ -39,7 +39,7 @@ class SignIn extends Component {
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Sign In</button>
             <div className="red-text text-darken-3 center">
-              {authError ? authError : null}
+              {authError ? <p>{authError}</p> : null}
             </div>
           </div>
         </form>
@@ -53,10 +53,4 @@ const mapStateToProps = (state) => ({
   auth: state.firebase.auth,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  signIn: (creds) => {
-    dispatch(signIn(creds));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, { signIn })(SignIn);
