@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import { formatDateToCalendarTime } from '../../helper';
 
 const ProjectDetails = (props) => {
   const { project, auth } = props;
   if (!auth.uid) return <Redirect to="/signin" />;
+
+  const formattedDate = formatDateToCalendarTime(
+    project ? project.createdAt.seconds * 1000 : null
+  );
 
   return (
     <div className="project-details section container">
@@ -20,11 +25,11 @@ const ProjectDetails = (props) => {
             <div>
               Posted by {project.authorFirstname} {project.authorLastname}
             </div>
-            <div>2nd September, 2am</div>
+            <div>{formattedDate}</div>
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p className="center">Loading...</p>
       )}
     </div>
   );

@@ -16,7 +16,8 @@ import {
   getFirestore,
   createFirestoreInstance,
 } from 'redux-firestore';
-import firebase, { firebaseConfig, rrfConfig } from './config/fbConfig';
+// firebaseConfig opt
+import firebase, { rrfConfig } from './config/fbConfig';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
