@@ -36,6 +36,7 @@ export default compose(
   firestoreConnect([
     {
       collection: 'projects',
+      orderBy: ['createdAt', 'desc'],
     },
   ])
 )(Dashboard);
